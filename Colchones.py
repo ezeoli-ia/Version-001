@@ -36,6 +36,8 @@ def CrearMatrizPrincipal(filas,columnas,sucursales,matriz):
                 relleno = str(random.randint(10,99))
                 matriz[f].append(str("   " + relleno + "  "))
     return matriz
+
+
 def colchones():
     diccColchones = {
     "Colchon1":{
@@ -52,6 +54,7 @@ def colchones():
     }
     }   
     return diccColchones
+
 
 def sucursales():
     DiccSucursales = {
