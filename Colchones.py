@@ -10,8 +10,6 @@ Permite registrar, modificar y visualizar información de colchones y sucursales
 realizar compras, ventas y cambios de precios. Incluye funcionalidades para la gestión de stock y 
 administración de sucursales de manera eficiente.
 
-
-
 Pendientes:
 -----------------------------------------------------------------------------------------------
 """
