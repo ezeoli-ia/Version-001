@@ -5,6 +5,12 @@ Fecha:23/9/2024
 Autor:Ezequiel Oliveto / Facundo Urban / Sofia Blanc / Milagros Hermansson / Juliana Rivas
 
 Descripción:
+Colchi es un sistema de gestión de inventario y sucursales para una empresa de colchones. 
+Permite registrar, modificar y visualizar información de colchones y sucursales, así como 
+realizar compras, ventas y cambios de precios. Incluye funcionalidades para la gestión de stock y 
+administración de sucursales de manera eficiente.
+
+
 
 Pendientes:
 -----------------------------------------------------------------------------------------------
@@ -85,17 +91,6 @@ def cambiarPrecioColchon():
 # CUERPO PRINCIPAL
 #----------------------------------------------------------------------------------------------
 def main():
-    
-    matriz = [
-    [" ", "Colchones de muelles", "Colchones de espuma", "Colchones de espuma viscoelástica", "Colchones híbridos", "Colchones de látex", "Colchones ortopédicos", "Colchones hinchables"],
-    ["Sucursal Central", 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Norte", 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Sur", 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Este", 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Oeste", 1, 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Plaza", 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Mercado", 1, 1, 1, 1, 1, 1, 1],
-]
 
     colchones = {
     "1":{
@@ -171,70 +166,84 @@ def main():
 }
     
     stock = {
-        "1":{
-            "Colchones de muelles":100,
-            "Colchones de espuma":150,
-            "Colchones de espuma viscoelástica":200,
-            "Colchones híbridos":100,
-            "Colchones de látex":140,
-            "Colchones ortopédicos":300,
-            "Colchones hinchables":240,
-        },
-        "2":{
-            "Colchones de muelles":100,
-            "Colchones de espuma":150,
-            "Colchones de espuma viscoelástica":200,
-            "Colchones híbridos":100,
-            "Colchones de látex":140,
-            "Colchones ortopédicos":300,
-            "Colchones hinchables":240,
-        },
-        "3":{
-            "Colchones de muelles":100,
-            "Colchones de espuma":150,
-            "Colchones de espuma viscoelástica":200,
-            "Colchones híbridos":100,
-            "Colchones de látex":140,
-            "Colchones ortopédicos":300,
-            "Colchones hinchables":240,
-        },
-        "4":{
-            "Colchones de muelles":100,
-            "Colchones de espuma":150,
-            "Colchones de espuma viscoelástica":200,
-            "Colchones híbridos":100,
-            "Colchones de látex":140,
-            "Colchones ortopédicos":300,
-            "Colchones hinchables":240,
-        },
-        "5":{
-            "Colchones de muelles":100,
-            "Colchones de espuma":150,
-            "Colchones de espuma viscoelástica":200,
-            "Colchones híbridos":100,
-            "Colchones de látex":140,
-            "Colchones ortopédicos":300,
-            "Colchones hinchables":240,
-        },
-        "6":{
-            "Colchones de muelles":100,
-            "Colchones de espuma":150,
-            "Colchones de espuma viscoelástica":200,
-            "Colchones híbridos":100,
-            "Colchones de látex":140,
-            "Colchones ortopédicos":300,
-            "Colchones hinchables":240,
-        },
-        "7":{
-            "Colchones de muelles":100,
-            "Colchones de espuma":150,
-            "Colchones de espuma viscoelástica":200,
-            "Colchones híbridos":100,
-            "Colchones de látex":140,
-            "Colchones ortopédicos":300,
-            "Colchones hinchables":240,
-        }
-        }
+    "1":{
+        "Colchones de muelles":100,
+        "Colchones de espuma":150,
+        "Colchones de espuma viscoelástica":200,
+        "Colchones híbridos":100,
+        "Colchones de látex":140,
+        "Colchones ortopédicos":300,
+        "Colchones hinchables":240,
+    },
+    "2":{
+        "Colchones de muelles":100,
+        "Colchones de espuma":150,
+        "Colchones de espuma viscoelástica":200,
+        "Colchones híbridos":100,
+        "Colchones de látex":140,
+        "Colchones ortopédicos":300,
+        "Colchones hinchables":240,
+    },
+    "3":{
+        "Colchones de muelles":100,
+        "Colchones de espuma":150,
+        "Colchones de espuma viscoelástica":200,
+        "Colchones híbridos":100,
+        "Colchones de látex":140,
+        "Colchones ortopédicos":300,
+        "Colchones hinchables":240,
+    },
+    "4":{
+        "Colchones de muelles":100,
+        "Colchones de espuma":150,
+        "Colchones de espuma viscoelástica":200,
+        "Colchones híbridos":100,
+        "Colchones de látex":140,
+        "Colchones ortopédicos":300,
+        "Colchones hinchables":240,
+    },
+    "5":{
+        "Colchones de muelles":100,
+        "Colchones de espuma":150,
+        "Colchones de espuma viscoelástica":200,
+        "Colchones híbridos":100,
+        "Colchones de látex":140,
+        "Colchones ortopédicos":300,
+        "Colchones hinchables":240,
+    },
+    "6":{
+        "Colchones de muelles":100,
+        "Colchones de espuma":150,
+        "Colchones de espuma viscoelástica":200,
+        "Colchones híbridos":100,
+        "Colchones de látex":140,
+        "Colchones ortopédicos":300,
+        "Colchones hinchables":240,
+    },
+    "7":{
+        "Colchones de muelles":100,
+        "Colchones de espuma":150,
+        "Colchones de espuma viscoelástica":200,
+        "Colchones híbridos":100,
+        "Colchones de látex":140,
+        "Colchones ortopédicos":300,
+        "Colchones hinchables":240,
+    }
+}
+
+    matriz = [
+    [" ", "Colchones de muelles", "Colchones de espuma", "Colchones de espuma viscoelástica", "Colchones híbridos", "Colchones de látex", "Colchones ortopédicos", "Colchones hinchables"],
+    ["Sucursal Central", 1, 1, 1, 1, 1, 1, 1],
+    ["Sucursal Norte", 1, 1, 1, 1, 1, 1, 1],
+    ["Sucursal Sur", 1, 1, 1, 1, 1, 1, 1],
+    ["Sucursal Este", 1, 1, 1, 1, 1, 1, 1],
+    ["Sucursal Oeste", 1, 1, 1, 1, 1, 1, 1, 1],
+    ["Sucursal Plaza", 1, 1, 1, 1, 1, 1, 1],
+    ["Sucursal Mercado", 1, 1, 1, 1, 1, 1, 1],
+]   
+    
+    
+    
     #-------------------------------------------------------------------------------------------------------------------------------------
     while True:
         opciones = 8
