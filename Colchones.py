@@ -22,6 +22,23 @@ import random
 #----------------------------------------------------------------------------------------------
 # FUNCIONES
 #----------------------------------------------------------------------------------------------
+# [0]
+def crearMatriz(colchones,sucursales,stock):
+    matriz=[]
+    for f in range(len(sucursales)+1):
+        if f !=0:
+            matriz.append([sucursales[str(f)]["Sucursal"]])
+        else:
+            matriz.append([""])
+        for c in range(len(colchones)):
+            if f ==0:
+                matriz[f].append(colchones[str(c+1)]["Modelo"])
+            else:
+                NO=colchones[str(c+1)]["Modelo"]
+                matriz[f].append(stock[str(f)][NO])
+
+    return matriz
+
 
 # [1]
 def verMatriz(matriz):
@@ -270,86 +287,75 @@ def main():
 }
 
 
-    stock = {
-    "1":{
-        "Colchones de muelles":100,
-        "Colchones de espuma":150,
-        "Colchones de espuma viscoelástica":200,
-        "Colchones híbridos":100,
-        "Colchones de látex":140,
-        "Colchones ortopédicos":300,
-        "Colchones hinchables":240,
-    },
-    "2":{
-        "Colchones de muelles":100,
-        "Colchones de espuma":150,
-        "Colchones de espuma viscoelástica":200,
-        "Colchones híbridos":100,
-        "Colchones de látex":140,
-        "Colchones ortopédicos":300,
-        "Colchones hinchables":240,
-    },
-    "3":{
-        "Colchones de muelles":100,
-        "Colchones de espuma":150,
-        "Colchones de espuma viscoelástica":200,
-        "Colchones híbridos":100,
-        "Colchones de látex":140,
-        "Colchones ortopédicos":300,
-        "Colchones hinchables":240,
-    },
-    "4":{
-        "Colchones de muelles":100,
-        "Colchones de espuma":150,
-        "Colchones de espuma viscoelástica":200,
-        "Colchones híbridos":100,
-        "Colchones de látex":140,
-        "Colchones ortopédicos":300,
-        "Colchones hinchables":240,
-    },
-    "5":{
-        "Colchones de muelles":100,
-        "Colchones de espuma":150,
-        "Colchones de espuma viscoelástica":200,
-        "Colchones híbridos":100,
-        "Colchones de látex":140,
-        "Colchones ortopédicos":300,
-        "Colchones hinchables":240,
-    },
-    "6":{
-        "Colchones de muelles":100,
-        "Colchones de espuma":150,
-        "Colchones de espuma viscoelástica":200,
-        "Colchones híbridos":100,
-        "Colchones de látex":140,
-        "Colchones ortopédicos":300,
-        "Colchones hinchables":240,
-    },
-    "7":{
-        "Colchones de muelles":100,
-        "Colchones de espuma":150,
-        "Colchones de espuma viscoelástica":200,
-        "Colchones híbridos":100,
-        "Colchones de látex":140,
-        "Colchones ortopédicos":300,
-        "Colchones hinchables":240,
+    stock={
+        #Sucursal Central
+ '1': {'Colchones de muelles': 270,
+       'Colchones de espuma': 510,
+       'Colchones de espuma viscoelástica': 490,
+       'Colchones híbridos': 430,
+       'Colchones de látex': 50,
+       'Colchones ortopédicos': 590,
+       'Colchones hinchables': 370},
+
+        ##Sucursal Norte
+ '2': {'Colchones de muelles': 390,
+       'Colchones de espuma': 200,
+       'Colchones de espuma viscoelástica': 350,
+       'Colchones híbridos': 270,
+       'Colchones de látex': 110,
+       'Colchones ortopédicos': 530,
+       'Colchones hinchables': 60},
+
+        #Sucursal Sur
+ '3': {'Colchones de muelles': 340,
+       'Colchones de espuma': 180,
+       'Colchones de espuma viscoelástica': 550,
+       'Colchones híbridos': 570,
+       'Colchones de látex': 410,
+       'Colchones ortopédicos': 520,
+       'Colchones hinchables': 130},
+
+        #Sucursal Este
+ '4': {'Colchones de muelles': 470,
+       'Colchones de espuma': 400,
+       'Colchones de espuma viscoelástica': 520,
+       'Colchones híbridos': 350,
+       'Colchones de látex': 50,
+       'Colchones ortopédicos': 490,
+       'Colchones hinchables': 440},
+
+        #Sucursal Oeste
+ '5': {'Colchones de muelles': 150,
+       'Colchones de espuma': 330,
+       'Colchones de espuma viscoelástica': 360,
+       'Colchones híbridos': 480,
+       'Colchones de látex': 510,
+       'Colchones ortopédicos': 150,
+       'Colchones hinchables': 550},
+
+        #Sucursal Plaza
+ '6': {'Colchones de muelles': 590,
+       'Colchones de espuma': 120,
+       'Colchones de espuma viscoelástica': 30,
+       'Colchones híbridos': 580,
+       'Colchones de látex': 410,
+       'Colchones ortopédicos': 270,
+       'Colchones hinchables': 40},
+
+        #Sucursal Mercado
+ '7': {'Colchones de muelles': 380,
+       'Colchones de espuma': 60,
+       'Colchones de espuma viscoelástica': 390,
+       'Colchones híbridos': 310,
+       'Colchones de látex': 210,
+       'Colchones ortopédicos': 290,
+       'Colchones hinchables': 430}
     }
-}
-
-
-    matriz = [
-    [" ", "Colchones de muelles", "Colchones de espuma", "Colchones de espuma viscoelástica", "Colchones híbridos", "Colchones de látex", "Colchones ortopédicos", "Colchones hinchables"],
-    ["Sucursal Central", 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Norte", 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Sur", 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Este", 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Oeste", 1, 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Plaza", 1, 1, 1, 1, 1, 1, 1],
-    ["Sucursal Mercado", 1, 1, 1, 1, 1, 1, 1],
-]   
-
-
     
+    
+    matriz=crearMatriz(colchones,sucursales,stock)
+
+ 
     #-------------------------------------------------------------------------------------------------------------------------------------
     while True:
         opciones = 11+1
