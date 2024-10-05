@@ -23,24 +23,139 @@ import random
 # FUNCIONES
 #----------------------------------------------------------------------------------------------
 
+# [1]
+def verMatriz(matriz):
+    for fila in matriz:
+        print(fila)
 
-def comprarVentaDeColchones():
+# [2]
+def verInformacionSobreLosColchones(colchones):
+    opciones=len(colchones)+1
+    while True:
+                print()
+                print("---------------------------")
+                print("MENÚ DE LOS COLCHONES      ")
+                print("---------------------------")
+                print("[ 0 ] Toda la informacion de los modelos de colchones")
+                for elem in colchones: 
+                    print("[",elem,"]","Toda la informacion de los modelos de",colchones[elem]["Modelo"])
+                print("---------------------------")
+                print()
+                
+                opcion = input("Seleccione una opción: ")
+                if opcion in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
+                    if opcion!="0":
+                        print(colchones[opcion])
+                        break
+                    else:
+                        for op in colchones.items():
+                            print(op)
+                        
+                
+                else:
+                    input("Opción inválida. Presione ENTER para volver a seleccionar.")
+                
+                print()
 
-    return
+# [3]
+def verInformacionSobreLasSucursales(sucursales):
+    opciones=len(sucursales)+1
+    while True:
+        print()
+        print("---------------------------")
+        print("MENÚ DE LAS SUCURSALES     ")
+        print("---------------------------")
+        print("[ 0 ] Toda la informacion de las sucursales")
+        for elem in sucursales: 
+            print("[",elem,"]","Toda la informacion de los modelos de",sucursales[elem]["Sucursal"])
+        print("---------------------------")
+        print()
 
+                
+        opcion = input("Seleccione una opción: ")
+        if opcion in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
+            if opcion!="0":
+                print(sucursales[opcion])
+                break
+            else:
+                print(sucursales)
+                    
+        else:
+            input("Opción inválida. Presione ENTER para volver a seleccionar.")
+        print()
 
-def añadirYEliminarStock():
-    #Esta funcion permite sumar un numero en una fila(sucursal) y columna(modelo) en la matriz que hace referencia al stock.
+# [4]
+def añadirColchonesAlStock():
+    ...
 
-    return
+# [5]
+def eliminarColchonesDelStock():
+    ...
 
+# [6]
+def cambiarPrecioColchon():
+    ...
+
+# [7]
+def eliminarModelosDeColchones(colchones):
+    opciones=len(colchones)+1
+    while True:
+        print()
+        print("---------------------------------------------")
+        print("MENÚ PARA ELIMINAR UN MODELO DE COLCHON      ")
+        print("---------------------------------------------")
+        for elem in colchones: 
+            print("[",elem,"]",colchones[elem]["Modelo"])
+        print("---------------------------")
+        print()
+                
+        opcion = input("Seleccione una opción: ")
+        if opcion in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
+            print()
+            print()
+            print("Se a eliminado la ",colchones[opcion]["Modelo"])
+            del colchones [(opcion)]
+            print()
+            print()
+            break
+        else:
+            input("Opción inválida. Presione ENTER para volver a seleccionar.")
+
+# [8]
+def eliminarSucursales(sucursales):
+    opciones=len(sucursales)+1
+    while True:
+        print()
+        print("---------------------------------------")
+        print("MENÚ PARA ELIMINAR UN SUCURSAL         ")
+        print("---------------------------------------")
+        for elem in sucursales: 
+            print("[",elem,"]",sucursales[elem]["Sucursal"])
+        print("---------------------------")
+        print()
+                
+        opcion = input("Seleccione una opción: ")
+        if opcion in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
+            print()
+            print()
+            print("Se a eliminado la ",sucursales[opcion]["Sucursal"])
+            del sucursales [(opcion)]
+            print()
+            print()
+            break
+        else:
+            input("Opción inválida. Presione ENTER para volver a seleccionar.")
+
+# [9]
+def preguntarPrecioColchones(): 
+    ...
+
+# [10]
 def añadirNuevosModelosDeColchones():
-    #Mili y Juli
-    # Esta funcion recibira el modelo y los datos del colchon que se quiere añadir al diccionario.
+    ...
 
-    return
-
-def añadirNuevasSucursales(nombreSucursal,direccionSucursal,stockMaximoSucursal):
+# [11]
+def añadirNuevasSucursal(nombreSucursal,direccionSucursal,stockMaximoSucursal):
     # Esta funcion recibira numero de sucursal, nombre, direccion y stock maximo. Agregara a el diccionario 
     # "sucursales" los datos.
     # Crear un diccionario interno con la información de la sucursal
@@ -65,104 +180,96 @@ def añadirNuevasSucursales(nombreSucursal,direccionSucursal,stockMaximoSucursal
 
     return
 
-def eliminarModelosDeColchones():
-    #Esta funcion recibira los datos que se quieran eleminar de la matriz.
+
+
+
+
+
+
     
-    return
-
-def eliminarSucursales():
-    #Esta funcion recibira los datos que se quieran eleminar de la matriz.
-    
-    return
-
-def preguntarPrecioColchones(): 
-    #Esta funcion permite ver el precio de cada modelo de colchon
-    
-    return
-
-def cambiarPrecioColchon():
-    #Esta funcion hace posible cambiar el precio a cualquier modelo de colchon
-
-    return
-
 #----------------------------------------------------------------------------------------------
 # CUERPO PRINCIPAL
 #----------------------------------------------------------------------------------------------
 def main():
 
     colchones = {
-    "1":{
-        "Modelo":"Colchones de muelles",
-        "Precio":"$400000",
+    "1": {
+        "Modelo": "Colchones de muelles",
+        "Precio": "$400.000",
+        "Medidas": "200x150 cm"
     },
-    "2":{
-        "Modelo":"Colchones de espuma",
-        "Precio":"$600000"
+    "2": {
+        "Modelo": "Colchones de espuma",
+        "Precio": "$600.000",
+        "Medidas": "190x140 cm"
     },
-     "3":{
-        "Modelo":"Colchones de espuma viscoelástica",
-        "Precio":"$500000"
+    "3": {
+        "Modelo": "Colchones de espuma viscoelástica",
+        "Precio": "$500.000",
+        "Medidas": "200x160 cm"
+    },
+    "4": {
+        "Modelo": "Colchones híbridos",
+        "Precio": "$400.000",
+        "Medidas": "200x180 cm"
+    },
+    "5": {
+        "Modelo": "Colchones de látex",
+        "Precio": "$600.000",
+        "Medidas": "190x120 cm"
+    },
+    "6": {
+        "Modelo": "Colchones ortopédicos",
+        "Precio": "$800.000",
+        "Medidas": "210x180 cm"
+    },
+    "7": {
+        "Modelo": "Colchones hinchables",
+        "Precio": "$200.000",
+        "Medidas": "180x120 cm"
     }
-    ,
-     "4":{
-        "Modelo":"Colchones híbridos",
-        "Precio":"$400000"
-    }
-    ,
-     "5":{
-        "Modelo":"Colchones de látex",
-        "Precio":"$600000"
-    }
-    ,
-     "6":{
-        "Modelo":"Colchones ortopédicos",
-        "Precio":"$800000"
-    }
-    ,
-     "7":{
-        "Modelo":"Colchones hinchables",
-        "Precio":"$200000"
-    }
-    }
+}
+
 
     sucursales = {
     "1": {
-        "nombre": "Sucursal Central",
-        "direccion": "Libertad 330",
-        "stock Maximo": 500
+        "Sucursal": "Sucursal Central",
+        "Direccion": "Libertad 330",
+        "Stock Maximo": 500
     }, 
     "2": {
-        "nombre": "Sucursal Norte",
-        "direccion": "Rivadavia 450",
-        "stock Maximo": 300
+        "Sucursal": "Sucursal Norte",
+        "Direccion": "Rivadavia 450",
+        "Stock Maximo": 300
     }, 
     "3": {
-        "nombre": "Sucursal Sur",
-        "direccion": "San Martín 120",
-        "stock Maximo": 400
+        "Sucursal": "Sucursal Sur",
+        "Direccion": "San Martín 120",
+        "Stock Maximo": 400
     }, 
     "4": {
-        "nombre": "Sucursal Este",
-        "direccion": "Belgrano 890",
-        "stock Maximo": 100
+        "Sucursal": "Sucursal Este",
+        "Direccion": "Belgrano 890",
+        "Stock Maximo": 100
     }, 
     "5": {
-        "nombre": "Sucursal Oeste",
-        "direccion": "Mitre 230",
-        "stock Maximo": 150
+        "Sucursal": "Sucursal Oeste",
+        "Direccion": "Mitre 230",
+        "Stock Maximo": 150
     }, 
     "6": {
-        "nombre": "Sucursal Plaza",
-        "direccion": "Sarmiento 670",
-        "stock Maximo": 300
+        "Sucursal": "Sucursal Plaza",
+        "Direccion": "Sarmiento 670",
+        "Stock Maximo": 300
     }, 
     "7": {
-        "nombre": "Sucursal Mercado",
-        "direccion": "Moreno 520",
-        "stock Maximo": 200
+        "Sucursal": "Sucursal Mercado",
+        "Direccion": "Moreno 520",
+        "Stock Maximo": 200
     }
 }
-    
+
+
     stock = {
     "1":{
         "Colchones de muelles":100,
@@ -229,6 +336,7 @@ def main():
     }
 }
 
+
     matriz = [
     [" ", "Colchones de muelles", "Colchones de espuma", "Colchones de espuma viscoelástica", "Colchones híbridos", "Colchones de látex", "Colchones ortopédicos", "Colchones hinchables"],
     ["Sucursal Central", 1, 1, 1, 1, 1, 1, 1],
@@ -239,12 +347,12 @@ def main():
     ["Sucursal Plaza", 1, 1, 1, 1, 1, 1, 1],
     ["Sucursal Mercado", 1, 1, 1, 1, 1, 1, 1],
 ]   
-    
-    
+
+
     
     #-------------------------------------------------------------------------------------------------------------------------------------
     while True:
-        opciones = 8
+        opciones = 11+1
         while True:
             print()
             print("---------------------------")
@@ -259,9 +367,10 @@ def main():
             print("[7] Eliminar modelo de colchon")
             print("[8] Eliminar sucursal")
             print("[9] Ver lista de precios")
+            print("[10] Añadir nuevos modelos de colchones")
+            print("[11] Añadir nuevas sucursal ")
             print("---------------------------")
-            print("[0] Salir del programa")
-            print()
+            
             
             opcion = input("Seleccione una opción: ")
             if opcion in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
@@ -269,88 +378,57 @@ def main():
             else:
                 input("Opción inválida. Presione ENTER para volver a seleccionar.")
         print()
-
+        
         if opcion == "0": # Opción salir del programa
             exit() # También puede ser sys.exit() para lo cual hay que importar el módulo sys
-        
-        elif opcion == "1":
-            for fila in matriz:
-                print(fila)
 
-        elif opcion == "2": 
-            while True:
-                print()
-                print("---------------------------")
-                print("MENÚ DE LOS COLCHONES      ")
-                print("---------------------------")
-                print("[0] Toda la informacion de los modelos de colchones")
-                print("[1] Informacion sobre los colchones de muelles")
-                print("[2] Informacion sobre los colchones de espuma")
-                print("[3] Informacion sobre los colchones de espuma viscoelástica")
-                print("[4] Informacion sobre los colchones híbridos")
-                print("[5] Informacion sobre los colchones látex")
-                print("[6] Informacion sobre los colchones ortopédicos")
-                print("[7] Informacion sobre los colchones hinchables")
-                print("---------------------------")
-                print()
-                
-                opcion = input("Seleccione una opción: ")
-                if opcion in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
-                    if opcion!="0":
-                        print(colchones[opcion])
-                    else:
-                        print(colchones)
-                    break
-                else:
-                    input("Opción inválida. Presione ENTER para volver a seleccionar.")
-                print()
+        
+
+
+
+        elif opcion == "1":
+            verMatriz(matriz)
+
+
+        elif opcion == "2":
+            verInformacionSobreLosColchones(colchones)
+
 
         elif opcion == "3":
-   
-            while True:
-                print()
-                print("---------------------------")
-                print("MENÚ DE LAS SUCURSALES     ")
-                print("---------------------------")
-                print("[0] Toda la informacion de las sucursales")
-                print("[1] Informacion sobre la Sucursal Central")
-                print("[2] Informacion sobre la Sucursal Norte")
-                print("[3] Informacion sobre la Sucursal Sur")
-                print("[4] Informacion sobre la Sucursal Este")
-                print("[5] Informacion sobre la Sucursal Oeste")
-                print("[6] Informacion sobre la Sucursal Plaza")
-                print("[7] Informacion sobre la Sucursal Mercado")
-                print("---------------------------")
-                print()
-                
-                opcion = input("Seleccione una opción: ")
-                if opcion in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
-                    if opcion!="0":
-                        print(sucursales[opcion])
-                    else:
-                        print(colchones)
+            verInformacionSobreLasSucursales(sucursales)
+            
 
-                    break
-                else:
-                    input("Opción inválida. Presione ENTER para volver a seleccionar.")
-                print()
         elif opcion == "4":   
-            ...
+            añadirColchonesAlStock()
         
+
         elif opcion == "5":   
-            ...
+            eliminarColchonesDelStock()
+
 
         elif opcion == "6":   
-            ...
+            cambiarPrecioColchon()
+
 
         elif opcion == "7":   
-            ...
+            eliminarModelosDeColchones(colchones)
 
+            
         elif opcion == "8":   
-            ...
+            eliminarSucursales(sucursales)
+
 
         elif opcion == "9":   
-            ...
+            preguntarPrecioColchones()
+
+
+        elif opcion == "10":  
+            añadirNuevosModelosDeColchones()
+
+
+        elif opcion == "11":  
+            añadirNuevasSucursal(nombreSucursal,direccionSucursal,stockMaximoSucursal)
+
 
         input("\nPresione ENTER para volver al menú.")
         print("\n\n")
