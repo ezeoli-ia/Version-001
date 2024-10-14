@@ -4,11 +4,14 @@ Título: Sistema de colchones
 Fecha:23/9/2024
 Autor:Ezequiel Oliveto / Facundo Urban / Sofia Blanc / Milagros Hermansson / Juliana Rivas
 
+
 Descripción:
+
 Colchi es un sistema de gestión de inventario y sucursales para una empresa de colchones. 
 Permite registrar, modificar y visualizar información de colchones y sucursales, así como 
 realizar compras, ventas y cambios de precios. Incluye funcionalidades para la gestión de stock y 
 administración de sucursales de manera eficiente.
+
 
 Pendientes:
 
@@ -17,7 +20,12 @@ Los precios son iguales en todas las sucursales
 Cuando cambias algo cambia, cambia en todas las sucursales (se elimina un modelo, se elimina en todas las sucursales)
 No hay funcion para volver a habilitar lo que esta deshabilitado 
 Hay funciones que terminan al poner 0
+Cuando pedis la informacion sobre los colchones NO aparece la cantidad de stock de cada sucursal
+Se puede poner mas stock del maximo
+No hay verificaciones al ingresar datos
 
+* Eliminar colchones del stock tiene algunos problemas al ingresar datos incorrectos
+* Errores en la funcion 5
 -----------------------------------------------------------------------------------------------
 """
 
@@ -33,19 +41,22 @@ import random
 # [1]
 def verMatriz(colchones,sucursales,stock):
     matriz=[]
-    for f in range(len(sucursales)+1):
-        if f !=0 and sucursales[str(f)]["Sucursal"]:
+    
+    for f in range(len(sucursales) + 1):
+        if f != 0 and sucursales[str(f)]["Status"] == True:  # Verificamos que el Status de la sucursal sea True
             matriz.append([sucursales[str(f)]["Sucursal"]])
         else:
             matriz.append([""])
+        
         for c in range(len(colchones)):
-            if colchones[str(f)]["Status"] == True:
-                if f ==0 and colchones[str(c+1)]["Modelo"]== True:
-                    matriz[f].append(colchones[str(c+1)]["Modelo"])
-                else:
-                    NO=colchones[str(c+1)]["Modelo"]
+            if colchones[str(c + 1)]["Status"] == True:  # Verificamos que el Status del colchón sea True
+                if f == 0 and colchones[str(c + 1)]["Modelo"]:  # Imprime el modelo de colchón en la primera fila
+                    matriz[f].append(colchones[str(c + 1)]["Modelo"])
+                elif f != 0:  # En otras filas imprimimos el stock de cada modelo en la sucursal
+                    NO = colchones[str(c + 1)]["Modelo"]
                     matriz[f].append(stock[str(f)][NO])
 
+                
     for fil in range(len(matriz)):
         print( )
         for col in range(len(matriz[0])):
@@ -118,11 +129,11 @@ def verInformacionSobreLasSucursales(sucursales):
             if opcion!="0":
                 if sucursales[str(opcion)]["Status"] == True: 
                     print( )
-                    print("-------------------------" )
-                    print(sucursales[opcion]["Sucursal"])
+                    print("-------------------------------" )
+                    print("Nombre de la sucursal: ",sucursales[opcion]["Sucursal"])
                     print("Direccion :",sucursales[opcion]["Direccion"])
                     print("Stock Maximo :",sucursales[opcion]["Stock Maximo"])
-                    print("-------------------------" )
+                    print("-------------------------------" )
                     print( )
                     break
                 else:
@@ -143,20 +154,20 @@ def verInformacionSobreLasSucursales(sucursales):
             input("Opción inválida. Presione ENTER para volver a seleccionar.")
         print()
 
-# [4]
+# [4] ###
 def añadirColchonesAlStock(colchones, sucursales, stock):
-    opciones=len(sucursales)+1
+    opciones=len(colchones)+1
     print()
     print()
     while True:
         print("---------------------------")
         print("Sucursales disponibles:")
         print("---------------------------")
-
-        #
-
+        aux=0
         for sucursal_id, sucursal_info in sucursales.items():
-            print("[ " + sucursal_id + " ] " + sucursal_info['Sucursal'])
+            aux=aux+1
+            if sucursales[str(aux)]["Status"]==True:
+                print("[ " + sucursal_id + " ] " + sucursal_info['Sucursal'])
         print("---------------------------")
         
         print()
@@ -164,12 +175,29 @@ def añadirColchonesAlStock(colchones, sucursales, stock):
         sucursal_elegida = input("Seleccione el número de la sucursal donde desea agregar colchones: ")
         print()
         print()
-
-        if sucursal_elegida in sucursales:
-            print("Ha seleccionado la " + sucursales[sucursal_elegida]['Sucursal'] + ".")
-            print()
-            print()
-            break  # Sale del bucle si la sucursal es válida
+        if sucursal_elegida in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
+            if int(sucursal_elegida) <len(sucursales):
+                if sucursales[str(sucursal_elegida)]["Status"] == True:
+                    print("Ha seleccionado la " + sucursales[sucursal_elegida]['Sucursal'] + ".")
+                    print()
+                    print()
+                    break  # Sale del bucle si la sucursal es válida
+                else:
+                    print()
+                    print()
+                    print("Opción inválida. Por favor, elija un número de sucursal válido.")
+                    print()
+                    print()
+                    print()
+                    print()
+            else:
+                print()
+                print()
+                print("Opción inválida. Por favor, elija un número de sucursal válido.")
+                print()
+                print()
+                print()
+                print()
         else:
             print()
             print()
@@ -180,19 +208,41 @@ def añadirColchonesAlStock(colchones, sucursales, stock):
             print()
 
     while True:
+        opciones=len(colchones)+1
         print("---------------------------")
         print("Modelos de colchones disponibles:")
         print("---------------------------")
+        aux=0
         for colchon_id, colchon_info in colchones.items():
-            print("[ " + colchon_id + " ] " + colchon_info['Modelo'])
+            aux=aux+1
+            if colchones[str(aux)]["Status"]==True:
+                print("[ " + colchon_id + " ] " + colchon_info['Modelo'])
         print("---------------------------")
         print()
         colchon_elegido = input("Seleccione el número del colchón que desea agregar al stock: ")
 
-        if colchon_elegido in colchones:
-            print()
-            print("Ha seleccionado el modelo " + colchones[colchon_elegido]['Modelo'] + ".")
-            break  # Sale del bucle si el colchón es válido
+        if colchon_elegido in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
+            if int(colchon_elegido) <len(colchones):
+                if colchones[str(colchon_elegido)]["Status"] == True:
+                    print()
+                    print("Ha seleccionado el modelo " + colchones[colchon_elegido]['Modelo'] + ".")
+                    break  # Sale del bucle si el colchón es válido
+                else:
+                    print()
+                    print()
+                    print("Opción inválida. Por favor, elija un número de sucursal válido.")
+                    print()
+                    print()
+                    print()
+                    print()
+            else:
+                print()
+                print()
+                print("Opción inválida. Por favor, elija un número de sucursal válido.")
+                print()
+                print()
+                print()
+                print()
         else:
             print()
             print()
@@ -219,85 +269,118 @@ def añadirColchonesAlStock(colchones, sucursales, stock):
     print("Se han agregado " + str(cantidad) + " colchones del modelo " + colchones[colchon_elegido]['Modelo'] + " al stock de la " + sucursales[sucursal_elegida]['Sucursal'] + ".") 
     print()
 
-# [5]
+# [5] ####
 def eliminarColchonesDelStock(colchones, sucursales, stock):
     while True:
+        opciones=len(sucursales)+1
         print()
         print("---------------------------")
         print("MENÚ PARA ELIMINAR COLCHONES DEL STOCK")
         print("---------------------------")
         
         # Mostrar las sucursales
+        aux = 0
         for sucursal in sucursales:
-            print(f"[{sucursal}] {sucursales[sucursal]['Sucursal']}")
+            aux=aux+1
+            if sucursales[str(aux)]["Status"] == True:
+                print(f"[{sucursal}] {sucursales[sucursal]['Sucursal']}")
         print("---------------------------")
 
         sucursal_opcion = input("Seleccione una sucursal: ")
 
-        if sucursal_opcion in sucursales:
-            print()
-            print()
-            print()
-            print(f"Sucursal seleccionada: {sucursales[sucursal_opcion]['Sucursal']}")
-            print("---------------------------")
-            # Mostrar los colchones disponibles en esa sucursal
-            for colchon in colchones:
-                print(f"[{colchon}] {colchones[colchon]['Modelo']} - Stock: {stock[sucursal_opcion][colchones[colchon]['Modelo']]}")
-            print("---------------------------")
-            print()
-            colchon_opcion = input("Seleccione un colchón para eliminar del stock: ")
+        if sucursal_opcion in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
+            if int(sucursal_opcion) <len(sucursales):
+                if sucursales[str(sucursal_opcion)]["Status"] == True:
+                    print()
+                    print()
+                    print()
+                    print(f"Sucursal seleccionada: {sucursales[sucursal_opcion]['Sucursal']}")
+                    print("---------------------------")
+                    # Mostrar los colchones disponibles en esa sucursal
+                    aux=0
+                    for colchon in colchones:
+                        aux=aux+1
+                        if colchones[str(aux)]["Status"]==True:
+                            print(f"[{colchon}] {colchones[colchon]['Modelo']} - Stock: {stock[sucursal_opcion][colchones[colchon]['Modelo']]}")
+                    print("---------------------------")
+                    print()
+                    opciones=len(colchones)+1
 
-            if colchon_opcion in colchones:
-                print()
-                cantidad = int(input(f"¿Cuántos {colchones[colchon_opcion]['Modelo']} desea eliminar?: "))
-                print()
-                if cantidad <= stock[sucursal_opcion][colchones[colchon_opcion]['Modelo']]:
-                    # Restar la cantidad del stock
-                    stock[sucursal_opcion][colchones[colchon_opcion]['Modelo']] -= cantidad
-                    print(f"Se han eliminado {cantidad} colchones de {colchones[colchon_opcion]['Modelo']} del stock de {sucursales[sucursal_opcion]['Sucursal']}.")
+                    colchon_opcion = input("Seleccione un colchón para eliminar del stock: ")
+                    
+                    if colchon_opcion in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
+                        if int(colchon_opcion) <len(colchones):
+                            if colchones[str(colchon_opcion)]["Status"] == True:
+                                print()
+                                cantidad = int(input(f"¿Cuántos {colchones[colchon_opcion]['Modelo']} desea eliminar?: "))
+                                print()
+                                if cantidad <= stock[sucursal_opcion][colchones[colchon_opcion]['Modelo']]:
+                                    # Restar la cantidad del stock
+                                    stock[sucursal_opcion][colchones[colchon_opcion]['Modelo']] -= cantidad
+                                    print(f"Se han eliminado {cantidad} colchones de {colchones[colchon_opcion]['Modelo']} del stock de {sucursales[sucursal_opcion]['Sucursal']}.")
+                                else:
+                                    print("Error: No hay suficientes colchones en stock para eliminar esa cantidad.")
+                            else:
+                                print()
+                                print("Opción inválida. Por favor, seleccione un colchón válido.")
+                        else:
+                                print()
+                                print("Opción inválida. Por favor, seleccione un colchón válido.")
+                    else:
+                                print()
+                                print("Opción inválida. Por favor, seleccione un colchón válido.")
                 else:
-                    print("Error: No hay suficientes colchones en stock para eliminar esa cantidad.")
-                break
+                    print()
+                    print("Opción inválida. Por favor, seleccione una sucursal válida.")
             else:
-                print("Opción inválida. Por favor, seleccione un colchón válido.")
+                print()
+                print("Opción inválida. Por favor, seleccione una sucursal válida.")
         else:
             print()
             print("Opción inválida. Por favor, seleccione una sucursal válida.")
 
-# [6]
+# [6] ####
 def cambiarPrecioColchon(colchones):
     # Mostrar todos los colchones disponibles
     print()
     print()
     print("Colchones disponibles:")
     print("-----------------------")
+    aux=0
     for key, colchon in colchones.items():
-        print(f"{key}. {colchon['Modelo']} - Precio: {colchon['Precio']}")
-        print("            -            ")
+        aux= aux+1
+        if colchones[str(aux)]["Status"]:
+            print(f"{key}. {colchon['Modelo']} - Precio: {colchon['Precio']}")
+            print("            -            ")
     
     # Seleccionar el colchón que se desea modificar
     print()
     print()
-    colchon_id = input("Elige el número del colchón que deseas modificar: ")
+    aux = 1
+    while True:
+        colchon_id = input("Elige el número del colchón que deseas modificar: ")
+        if colchon_id in colchones:
+            # Mostrar el colchón seleccionado
+            colchon_seleccionado = colchones[colchon_id]
+            print()
+            print(f"\nHas seleccionado: {colchon_seleccionado['Modelo']} - Precio actual: {colchon_seleccionado['Precio']}")
+            print()
+            # Pedir el nuevo precio
+            print()
+            nuevo_precio = input("Introduce el nuevo precio: $")
+            
+            # Actualizar el precio en el diccionario
+            colchones[colchon_id]["Precio"] = (f"${nuevo_precio}")
+            print()
+            print(f"\nEl precio del {colchon_seleccionado['Modelo']} ha sido actualizado a ${nuevo_precio}.")
+            break
+        else:
+            print()
+            print()
+            print("Opción inválida. Por favor, elija un número válido.")
+            print()
+            print()
     
-    if colchon_id in colchones:
-        # Mostrar el colchón seleccionado
-        colchon_seleccionado = colchones[colchon_id]
-        print(f"\nHas seleccionado: {colchon_seleccionado['Modelo']} - Precio actual: {colchon_seleccionado['Precio']}")
-        
-        # Pedir el nuevo precio
-        print()
-        nuevo_precio = input("Introduce el nuevo precio: $")
-        
-        # Actualizar el precio en el diccionario
-        colchones[colchon_id]["Precio"] = (f"${nuevo_precio}")
-        print()
-        print(f"\nEl precio del {colchon_seleccionado['Modelo']} ha sido actualizado a ${nuevo_precio}.")
-    else:
-        print()
-        print("ID de colchón no válido.")
-    
-    return colchones
 
 # [7]
 def eliminarModelosDeColchones(colchones):
@@ -361,43 +444,76 @@ def eliminarSucursales(sucursales):
 
 # [9]
 def preguntarPrecioColchones(colchones): 
-    precios = {}
-    for clave, valor in colchones.items():
-        modelo = valor["Modelo"]
-        precio = valor["Precio"]
-        precios[modelo] = precio
-    print(precios) 
+    for i in range(1,len(colchones)+1):
+        if colchones[str(i)]["Status"] == True:
+            print("                     -")
+            print("El precio del modelo ", colchones[str(i)]["Modelo"]," es de ",colchones[str(i)]["Precio"])
+    print()
 
-# [10]
-def añadirNuevosModelosDeColchones():
-    ...
-
-# [11]
-def añadirNuevasSucursal(nombreSucursal,direccionSucursal,stockMaximoSucursal):
-    # Esta funcion recibira numero de sucursal, nombre, direccion y stock maximo. Agregara a el diccionario 
-    # "sucursales" los datos.
-    # Crear un diccionario interno con la información de la sucursal
-    DiccSucursales=sucursales()
-    sucursalInfo={
-        "nombre":nombreSucursal,
-        "direccion":direccionSucursal,
-        "stockMaximo":stockMaximoSucursal,
+# [10] ###
+def añadirNuevosModelosDeColchones(colchones):
+    aux = 1
+    while aux==1:
+        print()
+        print()
+        modeloDeColchon=input("Nombre del nuevo modelo de colchon: ")
+        print()
+        precio=input("Cual es el precio del modelo :")
+        print()
+        medidas=input("Cuales son las medidas del colchon (Ej: 200x140 cm): ")
+        print()
+        print()
+        print()
+        print("Esta seguro de querer añadir un nuevo modelo de colchon con esta informacion?")
+        print("Modelo de colchon :", modeloDeColchon)
+        print("Precio : ", precio)
+        print("Medidas : ", medidas)
+        print()
+        print()
+        aux = int(input("Coloque [ 0 ] si esta seguro o [ 1 ] si desea volver a colocar los datos"))
+    
+    colchones[str(len(colchones)+1)]= {
+        "Status" : True,
+        "Modelo": modeloDeColchon,
+        "Precio": precio,
+        "Medidas": medidas,
     }
-    numeroSucursal = len(DiccSucursales) + 1
-    # Agregar el diccionario interno al diccionario externo
-    DiccSucursales["Sucursal"+numeroSucursal] = sucursalInfo
+
+# [11] ###
+def añadirNuevasSucursal(sucursales,stock,colchones):
+    aux = 1
+    while aux==1:
+        print()
+        print()
+        sucursal=input("Nombre de la nueva sucursal")
+        print()
+        direccion=input("Cual es la direccion de la sucursal")
+        print()
+        stockMaximo=input("Cual es el valor maximo de stock que puede tener la sucursal")
+        print()
+        print()
+        print()
+        print("Esta seguro de queres añadir una sucursal con esta informacion?")
+        print("Sucursal :", sucursal)
+        print("Direccion : ", direccion)
+        print("Stock maximo : ", stockMaximo)
+        print()
+        print()
+        aux = int(input("Coloque [ 0 ] si esta seguro o [ 1 ] si desea volver a colocar los datos"))
+        
     
-    """
-    nombreSucursal=input("Ingrese el nombre de la sucursal nueva: ")
-    direccionSucursal=input("Ingrese la dirección de la nueva sucursal: ")
-    stockMaximoSucursal=int(input("Ingese el stock maximo de la sucursal nueva: "))
-    
-    crearSucursal(nombreSucursal,direccionSucursal,stockMaximoSucursal)
-    """
-
-    return
-
-
+    sucursales[str(len(sucursales)+1)]= {
+        "Status" : True,
+        "Sucursal": sucursal,
+        "Direccion": direccion,
+        "Stock Maximo": stockMaximo,
+    }
+    for i in range (1,len(colchones)+1):
+        print(i)
+        aux=str(colchones[str(i)])
+        aux1=input("Cuanto stock de " + colchones[str(i)]["Modelo"] + " se tiene: ")
+        stock[str(len(sucursales))] ={aux : aux1}
+    print(stock)
 
 # Agregar una funcion de fuera de linea (False)?
 
@@ -881,23 +997,11 @@ def main():
 
 
     #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    """
-    print("Si quiere entrar con permisos de empleado coloque (1)")
+    
 
-    print( )
-
-    print("Si quiere entrar con permisos de administrador coloque (2)")
-
-    print( )
-    print( )
-    print( )
-    permisos = input("Elija :")
-    """
     #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     while True:
         opciones = 11+1
-        
-        
         
         while True:
             print()
@@ -905,35 +1009,32 @@ def main():
             print("MENÚ DEL SISTEMA           ")
             print("---------------------------")
             print("[1]  Ver Matriz")
-            print("[2]  Ver informacion sobre los colchones")
-            print("[3]  Ver informacion sobre las sucursales")
+            print("[2]  Ver información sobre los colchones")
+            print("[3]  Ver información sobre las sucursales")
             print("[4]  Añadir colchones al stock")
             print("[5]  Eliminar colchones del stock")
             print("[6]  Cambiar precio de los colchones")
-            print("[7]  Eliminar modelo de colchon")
+            print("[7]  Eliminar modelo de colchón")
             print("[8]  Eliminar sucursal")
             print("[9]  Ver lista de precios")
-            print("[10] Añadir nuevos modelos de colchones")
-            print("[11] Añadir nuevas sucursal ")
+            print("[10] Añadir nuevo modelo de colchón")
+            print("[11] Añadir nueva sucursal ")
             print("---------------------------")
-            
+            print("[0] Salir del sistema")
+            print("---------------------------")
+            print()
             
             opcion = input("Seleccione una opción: ")
             if opcion in [str(i) for i in range(0, opciones)]: # Sólo continua si se elije una opcion de menú válida
                 break
             else:
+                print()
                 input("Opción inválida. Presione ENTER para volver a seleccionar.")
         print()
         
         if opcion == "0": # Opción salir del programa
             exit() 
         
-
-        
-       
-            
-    
-
 
         if opcion == "1":
             verMatriz(colchones,sucursales,stock)
@@ -961,27 +1062,22 @@ def main():
 
         if opcion == "7" :   
             eliminarModelosDeColchones(colchones)
-        
-            
+
 
         if opcion == "8" :   
             eliminarSucursales(sucursales)
         
-
 
         if opcion == "9":   
             preguntarPrecioColchones(colchones)
 
 
         if opcion == "10" :  
-            añadirNuevosModelosDeColchones()
+            añadirNuevosModelosDeColchones(colchones)
         
 
-
         if opcion == "11":  
-            añadirNuevasSucursal(nombreSucursal,direccionSucursal,stockMaximoSucursal)
-        #else:
-            #print("Un usuario con permiso de empleado no puede usar esta funcion")
+            añadirNuevasSucursal(sucursales,stock,colchones)
 
 
         input("\nPresione ENTER para volver al menú.")
