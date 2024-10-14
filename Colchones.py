@@ -348,7 +348,7 @@ def añadirColchonesAlStock(colchones, sucursales, stock):
     print()
 
 # [5] 
-def eliminarColchonesDelStock(colchones, sucursales, stock, compra_venta):
+
     """
     Elimina una cantidad específica de colchones del stock de una sucursal seleccionada.
 
@@ -364,67 +364,51 @@ def eliminarColchonesDelStock(colchones, sucursales, stock, compra_venta):
     Returns:
     None
     """
+
+# [5] 
+def eliminarColchonesDelStock(stock):
+    # Mostrar sucursales disponibles
+    print("Sucursales disponibles:")
+    for sucursal_id, sucursal in stock.items():
+        print(f"{sucursal_id}: Sucursal {sucursal_id}")
     
-    while True:
-        opciones = len(sucursales) + 1
-        print()
-        print("---------------------------")
-        print("MENÚ PARA ELIMINAR COLCHONES DEL STOCK")
-        print("---------------------------")
-        
-        # Mostrar las sucursales
-        aux = 0
-        for sucursal in sucursales:
-            aux += 1
-            if sucursales[str(aux)]["Status"] == True:
-                print(f"[{sucursal}] {sucursales[sucursal]['Sucursal']}")
-        print("---------------------------")
-
-        sucursal_opcion = input("Seleccione una sucursal: ")
-        
-        if sucursal_opcion in [str(i) for i in range(1, opciones)]:  # Ajuste: los índices de las sucursales empiezan desde 1
-            if sucursales[sucursal_opcion]["Status"] == True:
-                print()
-                print(f"Sucursal seleccionada: {sucursales[sucursal_opcion]['Sucursal']}")
-                print("---------------------------")
-                
-                # Mostrar los colchones disponibles en esa sucursal
-                print("Colchones disponibles:")
-                for colchon_id in colchones:
-                    if colchones[colchon_id]["Status"] == True:
-                        modelo = colchones[colchon_id]["Modelo"]
-                        print(f"[{colchon_id}] {modelo} - Stock: {stock[sucursal_opcion][modelo]}")
-                print("---------------------------")
-                
-                colchon_opcion = input("Seleccione un colchón para eliminar del stock: ")
-                
-                if colchon_opcion in colchones and colchones[colchon_opcion]["Status"] == True:
-                    cantidad = int(input(f"¿Cuántos {colchones[colchon_opcion]['Modelo']} desea eliminar?: "))
-                    print()
-                    if cantidad <= stock[sucursal_opcion][colchon_opcion]:
-                        # Restar la cantidad del stock
-                        stock[sucursal_opcion][colchon_opcion] -= cantidad
-                        print(f"Se han eliminado {cantidad} colchones de {colchones[colchon_opcion]['Modelo']} del stock de {sucursales[sucursal_opcion]['Sucursal']}.")
-
-                        # Crear un nuevo ID de venta automáticamente
-                        nuevo_item_id = f"venta{str(len(compra_venta) + 1).zfill(2)}"  # Incrementar el número de venta automáticamente
-                        fecha_actual = datetime.now().strftime("%d/%m/%Y %H.%M")  # Obtener fecha y hora actuales
-
-                        # Añadir el nuevo ítem al diccionario de compras
-                        compra_venta[nuevo_item_id] = {
-                            "id": colchon_opcion, 
-                            "cantidad": cantidad, 
-                            "fecha": fecha_actual
-                        }    
-                        print("Venta realizada con éxito")
-                    else:
-                        print("Error: No hay suficientes colchones en stock para eliminar esa cantidad.")
-                else:
-                    print("Opción inválida. Por favor, seleccione un colchón válido.")
-            else:
-                print("Opción inválida. Por favor, seleccione una sucursal válida.")
-        else:
-            print("Opción inválida. Por favor, seleccione una sucursal válida.")
+    # Seleccionar sucursal
+    sucursal_seleccionada = input("Seleccione la sucursal ingresando el número correspondiente: ")
+    
+    # Validar sucursal seleccionada
+    if sucursal_seleccionada not in stock:
+        print("Sucursal no válida. Intente nuevamente.")
+        return
+    
+    # Mostrar modelos disponibles en la sucursal seleccionada
+    print("\nModelos disponibles:")
+    modelos = stock[sucursal_seleccionada]
+    for idx, modelo in enumerate(modelos.keys(), start=1):
+        print(f"{idx}: {modelo}")
+    
+    # Seleccionar modelo
+    modelo_seleccionado = input("Seleccione el modelo ingresando el número correspondiente: ")
+    
+    # Validar modelo seleccionado
+    if not modelo_seleccionado.isdigit() or int(modelo_seleccionado) < 1 or int(modelo_seleccionado) > len(modelos):
+        print("Modelo no válido. Intente nuevamente.")
+        return
+    
+    # Obtener el nombre del modelo a partir del índice
+    modelo_nombre = list(modelos.keys())[int(modelo_seleccionado) - 1]
+    
+    # Solicitar cantidad a eliminar
+    cantidad_a_eliminar = int(input(f"Ingrese la cantidad a eliminar del modelo '{modelo_nombre}': "))
+    
+    # Validar cantidad
+    if cantidad_a_eliminar > modelos[modelo_nombre]:
+        print(f"No se puede eliminar {cantidad_a_eliminar} unidades. Solo hay {modelos[modelo_nombre]} en stock.")
+        return
+    
+    # Modificar el stock
+    modelos[modelo_nombre] -= cantidad_a_eliminar
+    print(f"Se han eliminado {cantidad_a_eliminar} unidades del modelo '{modelo_nombre}' en la sucursal {sucursal_seleccionada}.")
+    print(f"Stock actualizado: {modelos[modelo_nombre]} unidades restantes del modelo '{modelo_nombre}'.")
     
 # [6] 
 def cambiarPrecioColchon(colchones):
@@ -1258,7 +1242,7 @@ def main():
             
 
             if opcion == "5":   
-                eliminarColchonesDelStock(colchones, sucursales, stock,compra_venta)
+                eliminarColchonesDelStock(stock)
 
 
             if opcion == "6":   
