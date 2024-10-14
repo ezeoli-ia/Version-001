@@ -38,6 +38,20 @@ from datetime import datetime
 
 # [1]
 def verMatriz(colchones,sucursales,stock):
+    """
+    Genera y muestra una matriz que combina la información de colchones y sucursales, incluyendo el stock disponible.
+
+    La primera fila de la matriz contiene los modelos de colchones habilitados, y las filas subsecuentes contienen
+    las sucursales habilitadas junto con el stock de cada modelo de colchón en cada sucursal.
+
+    Args:
+    colchones (dict): Diccionario con información de los modelos de colchones, donde cada clave es un identificador y los valores son detalles del colchón.
+    sucursales (dict): Diccionario con información de las sucursales, donde cada clave es un identificador y los valores son detalles de la sucursal.
+    stock (dict): Diccionario que representa el stock de cada modelo de colchón en cada sucursal.
+
+    Returns:
+    None
+    """
     matriz=[]
     
     for f in range(len(sucursales) + 1):
@@ -62,6 +76,19 @@ def verMatriz(colchones,sucursales,stock):
             
 # [2]
 def verInformacionSobreLosColchones(colchones,stock):
+    """
+    Muestra un menú interactivo para consultar información detallada de los modelos de colchones disponibles.
+
+    Permite al usuario seleccionar un colchón para ver detalles como el modelo, precio y medidas, o ver información
+    de todos los colchones habilitados.
+
+    Args:
+    colchones (dict): Diccionario con información de los modelos de colchones, donde cada clave es un identificador y los valores son detalles del colchón.
+    stock (dict): Diccionario que representa el stock de cada modelo de colchón en cada sucursal.
+
+    Returns:
+    None
+    """
     opciones=len(colchones)+1
     while True:
         print()
@@ -114,6 +141,18 @@ def verInformacionSobreLosColchones(colchones,stock):
 
 # [3]
 def verInformacionSobreLasSucursales(sucursales):
+    """
+    Muestra un menú interactivo para consultar información detallada de las sucursales habilitadas.
+
+    Permite al usuario seleccionar una sucursal para ver detalles como el nombre, dirección y capacidad de stock,
+    o ver información de todas las sucursales habilitadas.
+
+    Args:
+    sucursales (dict): Diccionario con información de las sucursales, donde cada clave es un identificador y los valores son detalles de la sucursal.
+
+    Returns:
+    None
+    """
     # variable para verificar el dato de la opcion ingresada
     opciones=len(sucursales)+1
     while True:
@@ -165,6 +204,20 @@ def verInformacionSobreLasSucursales(sucursales):
 
 # [4] 
 def añadirColchonesAlStock(colchones, sucursales, stock):
+    """
+    Añade una cantidad específica de colchones al stock de una sucursal seleccionada.
+
+    El usuario selecciona la sucursal y el modelo de colchón para luego ingresar la cantidad de colchones que desea agregar
+    al stock.
+
+    Args:
+    colchones (dict): Diccionario con información de los modelos de colchones.
+    sucursales (dict): Diccionario con información de las sucursales.
+    stock (dict): Diccionario que representa el stock de cada modelo de colchón en cada sucursal.
+
+    Returns:
+    None
+    """
     # Variable para verificar el dato ingresado
     opciones=len(colchones)+1
     print()
@@ -296,7 +349,21 @@ def añadirColchonesAlStock(colchones, sucursales, stock):
 
 # [5] 
 def eliminarColchonesDelStock(colchones, sucursales, stock, compra_venta):
-    
+    """
+    Elimina una cantidad específica de colchones del stock de una sucursal seleccionada.
+
+    El usuario selecciona la sucursal y el modelo de colchón para luego ingresar la cantidad que desea eliminar del stock.
+    La cantidad ingresada no puede superar el stock disponible.
+
+    Args:
+    colchones (dict): Diccionario con información de los modelos de colchones.
+    sucursales (dict): Diccionario con información de las sucursales.
+    stock (dict): Diccionario que representa el stock de cada modelo de colchón en cada sucursal.
+    compra_venta (str): Indica si la operación es de compra o venta (relevante para el manejo de stock).
+
+    Returns:
+    None
+    """
     
     while True:
         opciones = len(sucursales) + 1
@@ -361,6 +428,18 @@ def eliminarColchonesDelStock(colchones, sucursales, stock, compra_venta):
     
 # [6] 
 def cambiarPrecioColchon(colchones):
+    """
+    Permite modificar el precio de un colchón disponible.
+
+    Muestra una lista de colchones disponibles, solicita al usuario 
+    que elija uno y luego permite ingresar un nuevo precio, validando 
+    que este sea un número entero positivo. Actualiza el precio en el 
+    diccionario de colchones.
+
+    Args:
+        colchones (dict): Un diccionario que contiene los modelos de 
+                          colchones con sus precios y estado.
+    """
     # Mostrar todos los colchones disponibles
     print()
     print("Colchones disponibles:")
@@ -406,6 +485,17 @@ def cambiarPrecioColchon(colchones):
     
 # [7]
 def eliminarModelosDeColchones(colchones):
+    """
+    Elimina un modelo de colchón del inventario.
+
+    Muestra un menú con los modelos de colchones habilitados y permite 
+    al usuario seleccionar uno para eliminar. Cambia el estado del 
+    colchón seleccionado a 'False', marcándolo como no disponible.
+
+    Args:
+        colchones (dict): Un diccionario que contiene los modelos de 
+                          colchones con su estado.
+    """
     #Variable para validar el menu
     opciones=len(colchones)+1
     while True:
@@ -441,6 +531,17 @@ def eliminarModelosDeColchones(colchones):
 
 # [8]
 def eliminarSucursales(sucursales):
+    """
+    Elimina una sucursal del inventario.
+
+    Presenta un menú con las sucursales habilitadas y permite al 
+    usuario seleccionar una para eliminar. Cambia el estado de la 
+    sucursal seleccionada a 'False', marcándola como no disponible.
+
+    Args:
+        sucursales (dict): Un diccionario que contiene las sucursales 
+                           con su estado.
+    """
     #Variable para validar el menu
     opciones=len(sucursales)+1
     while True:
@@ -477,8 +578,14 @@ def eliminarSucursales(sucursales):
 # [9]
 def preguntarPrecioColchones(colchones):
     """
-    Esta funcion muestra una lista de los modelos de colchones con su precio
-    usa un for de conteo y una verificacion de disponibilidad, para imprimir lo necesario
+    Muestra los precios de los colchones disponibles.
+
+    Recorre la lista de colchones y muestra el modelo y precio 
+    de cada uno que está habilitado.
+
+    Args:
+        colchones (dict): Un diccionario que contiene los modelos de 
+                          colchones con sus precios y estado.
     """
     for i in range(1,len(colchones)+1):
         if colchones[str(i)]["Status"] == True:
@@ -488,6 +595,18 @@ def preguntarPrecioColchones(colchones):
 
 # [10] 
 def añadirNuevosModelosDeColchones(colchones):
+    """
+    Añade un nuevo modelo de colchón al diccionario de colchones.
+
+    Solicita al usuario los detalles del nuevo modelo de colchón, 
+    incluyendo el nombre, precio y medidas. Confirma la 
+    información antes de agregar el modelo al diccionario de 
+    colchones.
+
+    Args:
+        colchones (dict): Un diccionario donde se almacenan los modelos 
+                          de colchones existentes.
+    """
     aux = 1
     # bucble para reafirmar los datos ingresados
     while aux==1:
@@ -519,7 +638,19 @@ def añadirNuevosModelosDeColchones(colchones):
 # [11] 
 def añadirNuevasSucursal(sucursales,stock,colchones):
     """
-    
+    Añade una nueva sucursal al inventario.
+
+    Solicita al usuario la información de la nueva sucursal, 
+    incluyendo el nombre, dirección y stock máximo. Confirma la 
+    información antes de agregar la sucursal al diccionario de 
+    sucursales.
+
+    Args:
+        sucursales (dict): Un diccionario donde se almacenan las 
+                           sucursales existentes.
+        stock (int): El stock máximo permitido en la sucursal.
+        colchones (dict): Un diccionario que contiene los modelos de 
+                          colchones para la nueva sucursal.
     """
     aux = 1
     # bucble para reafirmar los datos ingresados
@@ -558,8 +689,6 @@ def añadirNuevasSucursal(sucursales,stock,colchones):
             aux=str(colchones[str(i)])
             aux1=input("Cuanto stock de " + colchones[str(i)]["Modelo"] + " se tiene: ")
             stock[str(len(sucursales))] ={aux : aux1}
-
-
 
 
 
