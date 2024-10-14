@@ -1,28 +1,239 @@
+stock = {
+    # Sucursal Central (Stock Máximo: 500)
+    '1': {
+        'Colchones de muelles': 50,
+        'Colchones de espuma': 40,
+        'Colchones de espuma viscoelástica': 30,
+        'Colchones híbridos': 30,
+        'Colchones de látex': 20,
+        'Colchones ortopédicos': 20,
+        'Colchones hinchables': 40,
+        'Colchón de espuma de alta densidad': 40,
+        'Colchón de muelles ensacados': 30,
+        'Colchón de látex natural': 20,
+        'Colchón plegable': 10,
+        'Colchón futón': 10,
+        'Colchón ecológico': 10,
+        'Colchón para camping': 15,
+        'Colchón ortopédico de espuma': 20,
+        'Colchón viscoelástico básico': 20,
+        'Colchón inflable de lujo': 15,
+        'Colchón de espuma gruesa': 20,
+        'Colchón con capa de gel': 15,
+        'Colchón de muelles ortopédico': 10,
+        'Colchón viscoelástico de lujo': 10,
+        'Colchón doble de látex': 10,
+        'Colchón de espuma económica': 20,
+        'Colchón de muelles básicos': 10,
+        'Colchón de espuma ortopédico': 20,
+        'Colchón plegable compacto': 10,
+        'Colchón inflable de espuma': 15,
+        'Colchón de látex con memoria': 10,
+        'Colchón ortopédico de muelles': 10,
+        'Colchón ecológico de espuma': 10
+    },
 
+    # Sucursal Norte (Stock Máximo: 300)
+    '2': {
+        'Colchones de muelles': 30,
+        'Colchones de espuma': 30,
+        'Colchones de espuma viscoelástica': 20,
+        'Colchones híbridos': 20,
+        'Colchones de látex': 10,
+        'Colchones ortopédicos': 15,
+        'Colchones hinchables': 20,
+        'Colchón de espuma de alta densidad': 15,
+        'Colchón de muelles ensacados': 10,
+        'Colchón de látex natural': 10,
+        'Colchón plegable': 10,
+        'Colchón futón': 10,
+        'Colchón ecológico': 10,
+        'Colchón para camping': 10,
+        'Colchón ortopédico de espuma': 10,
+        'Colchón viscoelástico básico': 10,
+        'Colchón inflable de lujo': 5,
+        'Colchón de espuma gruesa': 10,
+        'Colchón con capa de gel': 10,
+        'Colchón de muelles ortopédico': 10,
+        'Colchón viscoelástico de lujo': 10,
+        'Colchón doble de látex': 10,
+        'Colchón de espuma económica': 10,
+        'Colchón de muelles básicos': 10,
+        'Colchón de espuma ortopédico': 10,
+        'Colchón plegable compacto': 5,
+        'Colchón inflable de espuma': 10,
+        'Colchón de látex con memoria': 5,
+        'Colchón ortopédico de muelles': 10,
+        'Colchón ecológico de espuma': 10
+    },
 
+    # Sucursal Sur (Stock Máximo: 400)
+    '3': {
+        'Colchones de muelles': 40,
+        'Colchones de espuma': 40,
+        'Colchones de espuma viscoelástica': 30,
+        'Colchones híbridos': 30,
+        'Colchones de látex': 20,
+        'Colchones ortopédicos': 20,
+        'Colchones hinchables': 40,
+        'Colchón de espuma de alta densidad': 30,
+        'Colchón de muelles ensacados': 20,
+        'Colchón de látex natural': 20,
+        'Colchón plegable': 15,
+        'Colchón futón': 20,
+        'Colchón ecológico': 10,
+        'Colchón para camping': 10,
+        'Colchón ortopédico de espuma': 20,
+        'Colchón viscoelástico básico': 10,
+        'Colchón inflable de lujo': 10,
+        'Colchón de espuma gruesa': 20,
+        'Colchón con capa de gel': 20,
+        'Colchón de muelles ortopédico': 10,
+        'Colchón viscoelástico de lujo': 10,
+        'Colchón doble de látex': 10,
+        'Colchón de espuma económica': 10,
+        'Colchón de muelles básicos': 20,
+        'Colchón de espuma ortopédico': 20,
+        'Colchón plegable compacto': 10,
+        'Colchón inflable de espuma': 10,
+        'Colchón de látex con memoria': 10,
+        'Colchón ortopédico de muelles': 10,
+        'Colchón ecológico de espuma': 10
+    },
 
+    # Sucursal Este (Stock Máximo: 100)
+    '4': {
+        'Colchones de muelles': 10,
+        'Colchones de espuma': 10,
+        'Colchones de espuma viscoelástica': 5,
+        'Colchones híbridos': 5,
+        'Colchones de látex': 5,
+        'Colchones ortopédicos': 5,
+        'Colchones hinchables': 10,
+        'Colchón de espuma de alta densidad': 5,
+        'Colchón de muelles ensacados': 5,
+        'Colchón de látex natural': 5,
+        'Colchón plegable': 5,
+        'Colchón futón': 5,
+        'Colchón ecológico': 5,
+        'Colchón para camping': 5,
+        'Colchón ortopédico de espuma': 5,
+        'Colchón viscoelástico básico': 5,
+        'Colchón inflable de lujo': 5,
+        'Colchón de espuma gruesa': 5,
+        'Colchón con capa de gel': 5,
+        'Colchón de muelles ortopédico': 5,
+        'Colchón viscoelástico de lujo': 5,
+        'Colchón doble de látex': 5,
+        'Colchón de espuma económica': 5,
+        'Colchón de muelles básicos': 5,
+        'Colchón de espuma ortopédico': 5,
+        'Colchón plegable compacto': 5,
+        'Colchón inflable de espuma': 5,
+        'Colchón de látex con memoria': 5,
+        'Colchón ortopédico de muelles': 5,
+        'Colchón ecológico de espuma': 5
+    },
 
+    # Sucursal Oeste (Stock Máximo: 150)
+    '5': {
+        'Colchones de muelles': 20,
+        'Colchones de espuma': 20,
+        'Colchones de espuma viscoelástica': 15,
+        'Colchones híbridos': 15,
+        'Colchones de látex': 10,
+        'Colchones ortopédicos': 10,
+        'Colchones hinchables': 20,
+        'Colchón de espuma de alta densidad': 10,
+        'Colchón de muelles ensacados': 10,
+        'Colchón de látex natural': 10,
+        'Colchón plegable': 5,
+        'Colchón futón': 10,
+        'Colchón ecológico': 5,
+        'Colchón para camping': 5,
+        'Colchón ortopédico de espuma': 10,
+        'Colchón viscoelástico básico': 5,
+        'Colchón inflable de lujo': 5,
+        'Colchón de espuma gruesa': 10,
+        'Colchón con capa de gel': 10,
+        'Colchón de muelles ortopédico': 5,
+        'Colchón viscoelástico de lujo': 5,
+        'Colchón doble de látex': 5,
+        'Colchón de espuma económica': 5,
+        'Colchón de muelles básicos': 10,
+        'Colchón de espuma ortopédico': 10,
+        'Colchón plegable compacto': 5,
+        'Colchón inflable de espuma': 10,
+        'Colchón de látex con memoria': 5,
+        'Colchón ortopédico de muelles': 5,
+        'Colchón ecológico de espuma': 5
+    },
 
+    # Sucursal Plaza (Stock Máximo: 300)
+    '6': {
+        'Colchones de muelles': 30,
+        'Colchones de espuma': 30,
+        'Colchones de espuma viscoelástica': 25,
+        'Colchones híbridos': 25,
+        'Colchones de látex': 20,
+        'Colchones ortopédicos': 20,
+        'Colchones hinchables': 30,
+        'Colchón de espuma de alta densidad': 20,
+        'Colchón de muelles ensacados': 15,
+        'Colchón de látex natural': 10,
+        'Colchón plegable': 10,
+        'Colchón futón': 10,
+        'Colchón ecológico': 10,
+        'Colchón para camping': 10,
+        'Colchón ortopédico de espuma': 10,
+        'Colchón viscoelástico básico': 10,
+        'Colchón inflable de lujo': 10,
+        'Colchón de espuma gruesa': 10,
+        'Colchón con capa de gel': 10,
+        'Colchón de muelles ortopédico': 10,
+        'Colchón viscoelástico de lujo': 10,
+        'Colchón doble de látex': 10,
+        'Colchón de espuma económica': 10,
+        'Colchón de muelles básicos': 10,
+        'Colchón de espuma ortopédico': 10,
+        'Colchón plegable compacto': 10,
+        'Colchón inflable de espuma': 10,
+        'Colchón de látex con memoria': 10,
+        'Colchón ortopédico de muelles': 10,
+        'Colchón ecológico de espuma': 10
+    },
 
-matriz=[]
-for f in range(10):
-    if f !=0:
-        matriz.append([34])
-    else:
-         matriz.append([" "])
-    for c in range(7):
-        if f ==0:
-             matriz[f].append(66)
-        else:
-            matriz[f].append(5)
-
-
-
-
-
-
-
-
-
-for fila in matriz:
-        print(fila)
+    # Sucursal Mercado (Stock Máximo: 200)
+    '7': {
+        'Colchones de muelles': 20,
+        'Colchones de espuma': 20,
+        'Colchones de espuma viscoelástica': 15,
+        'Colchones híbridos': 15,
+        'Colchones de látex': 10,
+        'Colchones ortopédicos': 10,
+        'Colchones hinchables': 20,
+        'Colchón de espuma de alta densidad': 10,
+        'Colchón de muelles ensacados': 10,
+        'Colchón de látex natural': 5,
+        'Colchón plegable': 5,
+        'Colchón futón': 5,
+        'Colchón ecológico': 5,
+        'Colchón para camping': 5,
+        'Colchón ortopédico de espuma': 10,
+        'Colchón viscoelástico básico': 5,
+        'Colchón inflable de lujo': 5,
+        'Colchón de espuma gruesa': 10,
+        'Colchón con capa de gel': 10,
+        'Colchón de muelles ortopédico': 5,
+        'Colchón viscoelástico de lujo': 5,
+        'Colchón doble de látex': 5,
+        'Colchón de espuma económica': 5,
+        'Colchón de muelles básicos': 10,
+        'Colchón de espuma ortopédico': 10,
+        'Colchón plegable compacto': 5,
+        'Colchón inflable de espuma': 10,
+        'Colchón de látex con memoria': 5,
+        'Colchón ortopédico de muelles': 5,
+        'Colchón ecológico de espuma': 5
+    }
+}
